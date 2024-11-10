@@ -1,68 +1,23 @@
 class ZebraController < ApplicationController
-  def giraffe #2d6
-    @random_move = ["rock", "paper", "scissors"].sample
-    our_move = "rock"
 
-    if @random_move == "rock"
-      @outcome = "tied"
-    elsif @random_move == "paper"
-      @outcome = "lost"
-    else
-      @outcome = "won"
+  def lion
+    @num_dice = params.fetch("number_of_dice").to_i
+    @num_sides = params.fetch("number_of_sides").to_i
+
+    @rolls = []
+
+    @num_dice.times do
+      die = rand(1..@num_sides)
+
+      @rolls.push(die)
     end
 
-    render({ :template => "game_templates/play_rock"})
-  end
-
-  def elephant #2d10
-    @random_move = ["rock", "paper", "scissors"].sample
-
-    our_move = "paper"
-
-    if @random_move == "paper"
-      @outcome = "tied"
-    elsif @random_move == "scissors"
-      @outcome = "lost"
-    else
-      @outcome = "won"
-    end
-
-    render({ :template => "game_templates/play_paper"})
-  end
-
-  def lion #1d20
-    @random_move = ["rock", "paper", "scissors"].sample
-    our_move = "scissors"
-
-    if @random_move == "scissors"
-      @outcome = "tied"
-    elsif @random_move == "rock"
-      @outcome = "lost"
-    else
-      @outcome = "won"
-    end
-
-    render({ :template => "game_templates/play_scissors"})
-  end
-
-  def rhino #5d4
-    @random_move = ["rock", "paper", "scissors"].sample
-    our_move = "scissors"
-
-    if @random_move == "scissors"
-      @outcome = "tied"
-    elsif @random_move == "rock"
-      @outcome = "lost"
-    else
-      @outcome = "won"
-    end
-
-    render({ :template => "game_templates/play_scissors"})
+    render({ :template => "game_templates/flexible"})
   end
 
 
   def rules
-
-    render({ :template => "game_templates/rules"})
+    render({ :template => "game_templates/flexible"})
   end
+  
 end
